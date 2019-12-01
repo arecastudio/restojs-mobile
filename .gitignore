@@ -64,3 +64,4 @@ android/*
 ios/*
 node_modules/*
 __test__/*
+package_lock.json
