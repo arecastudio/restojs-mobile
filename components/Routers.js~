@@ -1,0 +1,14 @@
+import React from 'react'
+import { Router, Scene } from 'react-native-router-flux'
+import Dapurs from './Dapurs.js'
+import About from './About.js'
+
+const Routes = () => (
+   <Router>
+      <Scene key = "root">
+         <Scene key = "home" component = {Dapurs} title = "Home" initial = {true} />
+         <Scene key = "detail" component = {Dapursdetaul} title = "Detail" />
+      </Scene>
+   </Router>
+)
+export default Routes

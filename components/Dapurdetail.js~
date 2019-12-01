@@ -1,0 +1,44 @@
+import React from 'react';
+import{
+    View,
+    Text,
+    TextInput,
+    StyleSheet,
+    Image,
+    Button,
+    Alert,
+    Picker,
+} from 'react-native';
+
+//const ic_home='./images/logo.png';
+
+export default class Login extends React.Component{
+
+    constructor(){
+	super();
+	this.state={
+	    role:'pelayan',
+	    userName:'',
+	    passWord:'',
+	}
+    }
+    
+    render(){
+	return(
+		<View style={styles.container}>
+	    <Text>Dapur detial</Text>
+	    
+	    </View>	    
+	);
+    }
+}
+
+
+const styles=StyleSheet.create({
+    container:{
+	alignItems:'center',
+	justifyContent:'center',
+    },
+});
+
+//export default Login;
