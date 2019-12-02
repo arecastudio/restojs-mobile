@@ -20,6 +20,7 @@ export default class Orders extends React.Component{
 	super();
 	this.state={
 	    point:'0',
+	    meja:'',
 	}
     }
     
@@ -30,9 +31,24 @@ export default class Orders extends React.Component{
 	//let p=this.state.point;
 	switch(p){
 	case 1:
-	    Actions.pilihmeja();
+	    Actions.pilihmeja({gantiMeja:this.changeMeja});
 	    break;
+	case 2:
+	    Actions.pilihmenu();
 	}
+    }
+
+    changeMeja=(nomor)=>{
+	this.setState({meja:nomor});
+	//console.log('Order.js state meja:'+this.state.meja);
+	console.log('Order.js meja: '+nomor);
+	Actions.pop();
+    }
+
+    pilihMenu(){
+	//fungsi ini hanya untuk testing/ bisa dihapus
+	console.log('Order.js state meja:'+this.state.meja);
+	//console.log('pilih menu');	
     }
 
     render(){
@@ -44,7 +60,7 @@ export default class Orders extends React.Component{
 		<Text style={styles.txMenu}>1. Pilih Meja</Text>
 		</TouchableOpacity>
 
-		<TouchableOpacity style={styles.btnMenu}>
+		<TouchableOpacity style={styles.btnMenu} onPress={()=>this.changeView(2)}>
 		<Text style={styles.txMenu}>2. Pilih Menu</Text>
 		</TouchableOpacity>
 
