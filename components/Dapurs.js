@@ -154,7 +154,7 @@ const styles=StyleSheet.create({
 	justifyContent:'center',
 	borderRadius:20,
 	borderWidth: 1,
-	borderColor: '#fff'
+	borderColor: '#fff',
     },
     mejano:{
 	color:'white',

@@ -32,10 +32,14 @@ export default class Login extends React.Component{
 	});
     }
 
-    loginAuth(user,pass){
-	if(user=='admin'&&pass=='kevin'){
-	    this.setState({logIn:true});
-	}
+    loginAuth(){
+	let uname=this.state.userName;
+	let pass=this.state.passWord;
+
+	console.log('Login.js - userName: '+uname);
+	console.log('Login.js - userPass: '+pass);
+	
+	this.props.onLogin(uname,pass);
     }
     
     render(){
@@ -80,7 +84,7 @@ export default class Login extends React.Component{
 		<Button title="Reset" onPress={this.resetInput}/>
 		</View>
 		<View style={{flex:1,margin:5,}}>
-		<Button title="Login"/>
+		<Button title="Login" onPress={()=>this.loginAuth()} />
 		</View>
 		</View>
 

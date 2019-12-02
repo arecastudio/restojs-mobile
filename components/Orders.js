@@ -1,0 +1,91 @@
+import React from 'react';
+import{
+    View,
+    Text,
+    TextInput,
+    Picker,
+    ScrollView,
+    Button,
+    Alert,
+    StyleSheet,
+    TouchableOpacity,
+}from 'react-native';
+
+import { Actions } from 'react-native-router-flux';
+
+//import Pilihmeja from './components/Pilihmeja';
+
+export default class Orders extends React.Component{
+    constructor(){
+	super();
+	this.state={
+	    point:'0',
+	}
+    }
+    
+    componentDidMount(){
+    }
+
+    changeView(p){
+	//let p=this.state.point;
+	switch(p){
+	case 1:
+	    Actions.pilihmeja();
+	    break;
+	}
+    }
+
+    render(){
+	return(
+		<View style={styles.container}>
+		<ScrollView>
+		
+		<TouchableOpacity style={styles.btnMenu} onPress={()=>this.changeView(1)}>
+		<Text style={styles.txMenu}>1. Pilih Meja</Text>
+		</TouchableOpacity>
+
+		<TouchableOpacity style={styles.btnMenu}>
+		<Text style={styles.txMenu}>2. Pilih Menu</Text>
+		</TouchableOpacity>
+
+		<TouchableOpacity style={styles.btnMenu}>
+		<Text style={styles.txMenu}>3. Daftar Menu</Text>
+		</TouchableOpacity>
+
+		<TouchableOpacity style={styles.btnMenu}>
+		<Text style={styles.txMenu}>4. Reset</Text>
+		</TouchableOpacity>
+
+		<TouchableOpacity style={styles.btnMenu}>
+		<Text style={styles.txMenu}>5. Logout</Text>
+		</TouchableOpacity>
+		
+		</ScrollView>
+		</View>
+	);
+    }
+}
+
+const styles=StyleSheet.create({
+    container:{
+	alignItems:'center',
+	justifyContent:'center',
+    },
+    btnMenu:{
+	margin:3,
+	width:250,
+	height:90,
+	backgroundColor:'#000099',	
+	alignItems:'center',
+	justifyContent:'center',
+	borderRadius:20,
+	borderWidth: 1,
+	borderColor: '#fff',
+    },
+    txMenu:{
+	color:'white',
+	textAlign:'center',
+	fontWeight:'bold',
+	fontSize:20,
+    },
+});

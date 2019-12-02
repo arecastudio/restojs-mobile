@@ -29,6 +29,9 @@ import {
 import Kepala from './components/Kepala';
 import Login from './components/Login';
 import Routers from './components/Routers';
+import Frontrouter from './components/Frontrouter';
+import Orders from './components/Orders';
+//import Dapurs from './components/Dapurs';
 
 export default class App extends React.Component{
     constructor(props){
@@ -40,11 +43,25 @@ export default class App extends React.Component{
 	    userRole:'',
 	}
     }
+
+    _loginProcess=(uname,pass)=>{
+
+	console.log('App.js - userName: '+uname);
+	console.log('App.js - userPass: '+pass);
+	
+	if(uname=='A' && pass=='K'){
+	    this.setState({logIn:true});
+	}
+	console.log('login status: '+this.state.logIn);
+
+	//jika status false,login
+	//<Login login={this.state.logIn} onLogin={this._loginProcess}/>
+    }
     
     render(){
 	if(this.state.logIn!=true){
 	    return(
-		    <Login login={this.state.logIn}/>
+		    <Frontrouter/>
 	    );
 	}else{
 	    return(
