@@ -21,6 +21,7 @@ export default class Orders extends React.Component{
 	this.state={
 	    point:'0',
 	    meja:'',
+	    menu_dipilih:[],
 	}
     }
     
@@ -34,16 +35,22 @@ export default class Orders extends React.Component{
 	    Actions.pilihmeja({gantiMeja:this.changeMeja});
 	    break;
 	case 2:
-	    Actions.pilihmenu();
+	    Actions.pilihmenu({_pilihMenu:this.pilihMenus});
 	}
     }
 
+    //BOF global function
     changeMeja=(nomor)=>{
 	this.setState({meja:nomor});
 	//console.log('Order.js state meja:'+this.state.meja);
 	console.log('Order.js meja: '+nomor);
 	Actions.pop();
     }
+
+    pilihMenus(meja,id,nama,harga){
+	console.log('Orders.js. \nMeja:'+meja+',Menu id: '+id+',nama:'+nama+',harga:'+harga);
+    }
+    //EOF global function
 
     pilihMenu(){
 	//fungsi ini hanya untuk testing/ bisa dihapus

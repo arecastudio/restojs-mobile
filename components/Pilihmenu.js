@@ -15,7 +15,9 @@ import{
 
 import { Actions } from 'react-native-router-flux';
 
-const SERVER_URL='http://192.168.2.100:8010/backend/?';
+const SERVER_URL='http://10.0.2.2:8010/backend/?';
+//const SERVER_URL='http://192.168.2.100:8010/backend/?';
+//const SERVER_URL='http://192.168.0.1/restojs/backend/?';
 
 export default class Pilihmenu extends React.Component{
     constructor(){
@@ -24,11 +26,12 @@ export default class Pilihmenu extends React.Component{
 	    mejas:[],
 	    jenis_menu:'semua',
 	    menus:[],
+	    //dipilih:[],
 	}
     }
 
     componentDidMount(){
-	fetch('http://192.168.2.100:8010/backend/?data=pesan-meja', {
+	fetch(SERVER_URL+'data=data-menu', {
             method: 'GET'
 	})
 	    .then((response) => response.json())
@@ -36,13 +39,57 @@ export default class Pilihmenu extends React.Component{
 	    .catch((error) => {
 		//console.error(error);
 		Alert.alert('Terjadi kesalahan. Periksa koneksi anda !');
-	    });
+		});
+
+	/*let fdata=new FormData();
+	fdata.append('mod','data-menu');
+	fdata.append('act','show');
+	fdata.append('produk_id',id);
+	fdata.append('pesanan_id',pid);
+	fdata.append('meja',meja);
+	fdata.append('bungkus',bungkus);
+	fdata.append('batal','TIDAK');
+	fdata.append('siap','SDH');
+
+	//BOF API
+	//'http://192.168.2.100:8010/backend/?'
+	fetch(this.state.SERVER_URL, {
+	    method: 'POST',
+	    headers: {
+		//Accept: 'application/json',
+		//'Content-Type': 'application/json',
+		//'Content-Type': false,
+	    },
+	    body: fdata,
+	})
+	    .then((response) => response.json())
+	    .then(this.setState({menus:[]}))	    
+	    .catch((error) => {
+		//console.error(error);
+		console.log(error);
+		Alert.alert('Terjadi kesalahan!');
+	    })
+	    .done();*/
+	
     }
 
-    _onPress(nomor){
-	//console.log('Meja: '+nomor);
+    _onPress(nomor,nama,harga){
+	//console.log('Pilihmenu.js. \nMenu id: '+nomor+',nama:'+nama+',harga:'+harga);
 
-	this.props.gantiMeja(nomor);
+	//meja dummy
+	let meja="07";
+	this.props._pilihMenu(meja,nomor,nama,harga);
+	/*
+	const pils=this.state.dipilih.slice(0);
+	pils.push({
+	    meja:'02',
+	    id:nomor,
+	    nama:nama,
+	    harga:harga,
+	});
+
+	this.setState({dipilih:pils});*/
+	
     }
 
     render(){
@@ -81,7 +128,7 @@ export default class Pilihmenu extends React.Component{
 			    	    <TouchableOpacity
 				key={menus.id}
 				style={styles.mejabox}
-				onPress={()=>this._onPress(menus.id)}
+				onPress={()=>this._onPress(menus.id,menus.nama,menus.fharga)}
 				    >
 				    <Text key={menus.id} style={styles.mejano}>{menus.nama}</Text>
 				    <Text key={'harga-'+menus.id}>{menus.fharga}</Text>
@@ -121,7 +168,7 @@ const styles=StyleSheet.create({
 	borderRadius:10,
 	borderWidth: 1,
 	borderColor: '#fff',
-	padding:2,
+	padding:1,
     },
     mejano:{
 	color:'black',

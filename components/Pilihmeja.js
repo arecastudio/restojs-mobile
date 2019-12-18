@@ -15,7 +15,9 @@ import{
 
 import { Actions } from 'react-native-router-flux';
 
-const SERVER_URL='http://192.168.2.100:8010/backend/?';
+const SERVER_URL='http://10.0.2.2:8010/backend/?';
+//const SERVER_URL='http://192.168.2.100:8010/backend/?';
+//const SERVER_URL='http://192.168.0.1/restojs/backend/?';
 
 export default class Pilihmeja extends React.Component{
     constructor(){
@@ -26,7 +28,7 @@ export default class Pilihmeja extends React.Component{
     }
 
     componentDidMount(){
-	fetch('http://192.168.2.100:8010/backend/?data=data-order', {
+	fetch(SERVER_URL+'data=data-order', {
             method: 'GET'
 	})
 	    .then((response) => response.json())
@@ -41,6 +43,7 @@ export default class Pilihmeja extends React.Component{
 	//console.log('Meja: '+nomor);
 
 	this.props.gantiMeja(nomor);
+	//Actions.pilihmenu();
     }
 
     render(){

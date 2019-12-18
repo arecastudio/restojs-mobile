@@ -31,7 +31,7 @@ import Login from './components/Login';
 import Routers from './components/Routers';
 import Frontrouter from './components/Frontrouter';
 import Orders from './components/Orders';
-//import Dapurs from './components/Dapurs';
+import Dapurs from './components/Dapurs';
 
 export default class App extends React.Component{
     constructor(props){

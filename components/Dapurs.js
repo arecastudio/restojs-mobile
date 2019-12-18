@@ -17,6 +17,7 @@ import { Actions } from 'react-native-router-flux';
 
 //const ic_home='./images/logo.png';
 const SERVER_URL='http://192.168.2.100:8010/backend/?';
+//const SERVER_URL='http://192.168.0.1/restojs/backend/?';
 
 export default class Dapurs extends React.Component{
     constructor(){
@@ -33,7 +34,8 @@ export default class Dapurs extends React.Component{
 
 
     componentDidMount(){
-	/*fetch('http://192.168.2.100:8010/backend/?data=meja-tampil-di-dapur', {
+		/*
+	fetch('http://192.168.0.1/restojs/backend/?data=meja-tampil-di-dapur', {
             method: 'GET'
 	})
 	    .then((response) => response.json())
@@ -67,6 +69,7 @@ export default class Dapurs extends React.Component{
 	    })
 	    .done();
 	//EOF API
+
     }
 
     _onPress(nox){
