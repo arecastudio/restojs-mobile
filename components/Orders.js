@@ -28,14 +28,39 @@ export default class Orders extends React.Component{
     componentDidMount(){
     }
 
+    
     changeView(p){
 	//let p=this.state.point;
+	let mejax=this.state.meja;	
 	switch(p){
 	case 1:
-	    Actions.pilihmeja({gantiMeja:this.changeMeja});
+	    if(mejax!=''){
+		Alert.alert(
+		    "Info",
+		    "Meja sudah sudah dipilih: "+mejax+"\nTap RESET untuk pilih meja lain!"
+		);
+	    }else{
+		Actions.pilihmeja({gantiMeja:this.changeMeja});
+	    }
 	    break;
 	case 2:
-	    Actions.pilihmenu({_pilihMenu:this.pilihMenus});
+	    if(mejax!=''){
+		Actions.pilihmenu({_pilihMenu:this.pilihMenus});
+	    }else{
+		Alert.alert("Pilih MEJA terlebih dahulu!");
+	    }
+	    break;
+	case 3:
+	    if(mejax!=''){
+		//Actions.pilihmenu({_pilihMenu:this.pilihMenus});
+	    }else{
+		Alert.alert("Pilih MEJA terlebih dahulu!");
+	    }
+	    break;	    
+	case 4:
+	    this.setState({meja:''});
+	    Alert.alert("Reset OK");
+	    break;
 	}
     }
 
@@ -71,11 +96,11 @@ export default class Orders extends React.Component{
 		<Text style={styles.txMenu}>2. Pilih Menu</Text>
 		</TouchableOpacity>
 
-		<TouchableOpacity style={styles.btnMenu}>
+		<TouchableOpacity style={styles.btnMenu} onPress={()=>this.changeView(3)}>
 		<Text style={styles.txMenu}>3. Daftar Menu</Text>
 		</TouchableOpacity>
 
-		<TouchableOpacity style={styles.btnMenu}>
+		<TouchableOpacity style={styles.btnMenu} onPress={()=>this.changeView(4)}>
 		<Text style={styles.txMenu}>4. Reset</Text>
 		</TouchableOpacity>
 
