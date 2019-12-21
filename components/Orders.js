@@ -9,11 +9,14 @@ import{
     Alert,
     StyleSheet,
     TouchableOpacity,
+    ToastAndroid,
 }from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
 
 //import Pilihmeja from './components/Pilihmeja';
+
+const  mdipilih=[];
 
 export default class Orders extends React.Component{
     constructor(){
@@ -21,7 +24,37 @@ export default class Orders extends React.Component{
 	this.state={
 	    point:'0',
 	    meja:'',
-	    menu_dipilih:[],
+	    menu_dipilih:{},
+	    dummy:[
+		/*{
+		    meja:'12',
+		    id:9431,
+		    nama:'mujair bakar',
+		    harga:80000,
+		    jumlah:2,
+		},
+		{
+		    meja:'12',
+		    id:9432,
+		    nama:'nasi putih',
+		    harga:5000,
+		    jumlah:2,
+		},
+		{
+		    meja:'12',
+		    id:9434,
+		    nama:'jus jeruk',
+		    harga:10000,
+		    jumlah:3,
+		},
+		{
+		    meja:'12',
+		    id:9436,
+		    nama:'jus mangga',
+		    harga:12000,
+		    jumlah:1,
+		},	*/	
+	    ],
 	}
     }
     
@@ -52,16 +85,20 @@ export default class Orders extends React.Component{
 	    break;
 	case 3:
 	    if(mejax!=''){
-		//Actions.pilihmenu({_pilihMenu:this.pilihMenus});
+		Actions.daftarpilih({data_menu:this.state.dummy});
 	    }else{
 		Alert.alert("Pilih MEJA terlebih dahulu!");
 	    }
 	    break;	    
 	case 4:
-	    this.setState({meja:''});
+	    this.setState({meja:'',menu_dipilih:[],dummy:[]});
 	    Alert.alert("Reset OK");
 	    break;
+	case 5:
+	    console.log('Logout clicked !');
+	    break;
 	}
+	
     }
 
     //BOF global function
@@ -69,11 +106,36 @@ export default class Orders extends React.Component{
 	this.setState({meja:nomor});
 	//console.log('Order.js state meja:'+this.state.meja);
 	console.log('Order.js meja: '+nomor);
+	ToastAndroid.show('Meja dipilih: '+nomor,ToastAndroid.SHORT);
 	Actions.pop();
     }
 
-    pilihMenus(meja,id,nama,harga){
-	console.log('Orders.js. \nMeja:'+meja+',Menu id: '+id+',nama:'+nama+',harga:'+harga);
+    pilihMenus=(id,nama,harga)=>{
+	let mejax='55';
+	console.log('Orders.js. \nMeja:'+mejax+',Menu id: '+id+',nama:'+nama+',harga:'+harga);
+	//let new_menu_dipilih=this.state.menu_dipilih.slice();
+	//let new_menu_dipilih={};
+	mdipilih.map(()=>{
+	    mdipilih.push({
+		meja:mejax,
+		id:id,
+		nama:nama,
+		harga:harga
+	    });
+	});
+	
+	//this.setState({menu_dipilih:new_menu_dipilih});
+
+	let xdummy=this.state.dummy;
+
+	xdummy.push({
+	    meja:mejax,
+	    id:id,
+	    nama:nama,
+	    harga:harga
+	});
+
+	this.setState({dummy:xdummy});
     }
     //EOF global function
 
@@ -97,14 +159,14 @@ export default class Orders extends React.Component{
 		</TouchableOpacity>
 
 		<TouchableOpacity style={styles.btnMenu} onPress={()=>this.changeView(3)}>
-		<Text style={styles.txMenu}>3. Daftar Menu</Text>
+		<Text style={styles.txMenu}>3. Daftar Pesanan</Text>
 		</TouchableOpacity>
 
 		<TouchableOpacity style={styles.btnMenu} onPress={()=>this.changeView(4)}>
 		<Text style={styles.txMenu}>4. Reset</Text>
 		</TouchableOpacity>
 
-		<TouchableOpacity style={styles.btnMenu}>
+		<TouchableOpacity style={styles.btnMenu} onPress={()=>this.changeView(5)}>
 		<Text style={styles.txMenu}>5. Logout</Text>
 		</TouchableOpacity>
 		

@@ -77,8 +77,8 @@ export default class Pilihmenu extends React.Component{
 	//console.log('Pilihmenu.js. \nMenu id: '+nomor+',nama:'+nama+',harga:'+harga);
 
 	//meja dummy
-	let meja="07";
-	this.props._pilihMenu(meja,nomor,nama,harga);
+	//let meja="07";
+	this.props._pilihMenu(nomor,nama,harga);
 	/*
 	const pils=this.state.dipilih.slice(0);
 	pils.push({
