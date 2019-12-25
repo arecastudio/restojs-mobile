@@ -26,6 +26,7 @@ export default class Pilihmenu extends React.Component{
 	    mejas:[],
 	    jenis_menu:'semua',
 	    menus:[],
+	    menus_ori:[],
 	    //dipilih:[],
 	}
     }
@@ -35,7 +36,7 @@ export default class Pilihmenu extends React.Component{
             method: 'GET'
 	})
 	    .then((response) => response.json())
-	    .then((menus) => this.setState({menus}))
+	    .then((menus) => this.setState({menus:menus,menus_ori:menus,jenis_menu:'semua'}))
 	    .catch((error) => {
 		//console.error(error);
 		Alert.alert('Terjadi kesalahan. Periksa koneksi anda !');
@@ -89,9 +90,36 @@ export default class Pilihmenu extends React.Component{
 	});
 
 	this.setState({dipilih:pils});*/
-	
+	console.log('Jenis menu: '+this.state.jenis_menu);
     }
 
+    _gantiJenis=(jns)=>{
+	//ganti jenis menu
+	
+	let xmenux=[];
+	switch(jns){
+	    case 'makan':
+	    console.log('anda memilih makanan');
+	    xmenux=this.state.menus_ori.filter(x=>x.jenis==='MAKAN');
+	    break;
+	    case 'minum':
+	    console.log('anda memilih minuman');
+	    xmenux=this.state.menus_ori.filter(x=>x.jenis==='MINUM');
+	    break;
+	    default:
+	    console.log('anda memilih semua');
+	    xmenux=this.state.menus_ori;
+	}
+	
+	this.setState({jenis_menu:jns,menus:xmenux});
+	
+	console.log('jenis: '+jns);
+    }
+
+    _saringMenu=(kw)=>{
+	let xmenux=[];
+    }
+    
     render(){
 	return(
 		<View style={styles.container}>
@@ -100,9 +128,7 @@ export default class Pilihmenu extends React.Component{
 		<Picker
 	    selectedValue={this.state.jenis_menu}
 	    style={{height: 50, width: 300,fontWeight:'bold'}}
-	    onValueChange={(itemValue, itemIndex) =>
-			   this.setState({jenis_menu: itemValue})
-			  }
+	    onValueChange={this._gantiJenis}
 	    value={this.state.jenis_menu}
 		>
 		<Picker.Item label="Semua" value="semua" />
@@ -131,7 +157,7 @@ export default class Pilihmenu extends React.Component{
 				onPress={()=>this._onPress(menus.id,menus.nama,menus.fharga)}
 				    >
 				    <Text key={menus.id} style={styles.mejano}>{menus.nama}</Text>
-				    <Text key={'harga-'+menus.id}>{menus.fharga}</Text>
+				    <Text key={'harga-'+menus.id}>{menus.fharga}</Text>				    
 				    </TouchableOpacity>
 			    )
 			}   
