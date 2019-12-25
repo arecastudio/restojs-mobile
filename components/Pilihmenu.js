@@ -28,6 +28,7 @@ export default class Pilihmenu extends React.Component{
 	    menus:[],
 	    menus_ori:[],
 	    //dipilih:[],
+	    cari:'',
 	}
     }
 
@@ -116,9 +117,22 @@ export default class Pilihmenu extends React.Component{
 	console.log('jenis: '+jns);
     }
 
-    _saringMenu=(kw)=>{
-	let xmenux=[];
-    }
+    onSearch=(event)=>{
+	let keys=event.nativeEvent.text;
+
+	if(keys.length>=2){
+	    const filteredMenus=this.state.menus_ori.filter(item=>item.nama.includes(keys));
+	    //this.setState({menus:xmenux});
+	    
+	    
+	    console.log(filteredMenus);
+	}else{
+	    //
+	}
+
+	this.setState({cari:keys});
+	
+    } 
     
     render(){
 	return(
@@ -139,6 +153,8 @@ export default class Pilihmenu extends React.Component{
 
 		<TextInput
 	    placeholder="Cari berdasarkan nama..."
+	    onChange={this.onSearch}
+	    value={this.state.cari}
 		>
 		</TextInput>
 	    </View>
