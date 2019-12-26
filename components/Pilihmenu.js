@@ -118,19 +118,20 @@ export default class Pilihmenu extends React.Component{
     }
 
     onSearch=(event)=>{
-	let keys=event.nativeEvent.text;
-
-	if(keys.length>=2){
-	    const filteredMenus=this.state.menus_ori.filter(item=>item.nama.includes(keys));
+	let keys=event.nativeEvent.text.toLowerCase();
+	let xmenux=[];
+	
+	if(keys.length>=1){
+	    xmenux=this.state.menus_ori.filter(item=>item.nama.toLowerCase().includes(keys));
 	    //this.setState({menus:xmenux});
 	    
 	    
-	    console.log(filteredMenus);
+	    //console.log(xmenux);
 	}else{
-	    //
+	    xmenux=this.state.menus_ori;
 	}
 
-	this.setState({cari:keys});
+	this.setState({cari:keys,menus:xmenux});
 	
     } 
     

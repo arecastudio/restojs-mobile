@@ -111,10 +111,16 @@ export default class Orders extends React.Component{
     }
 
     pilihMenus=(id,nama,harga)=>{
-	let mejax='55';
+	let mejax=this.state.meja;
 	console.log('Orders.js. \nMeja:'+mejax+',Menu id: '+id+',nama:'+nama+',harga:'+harga);
 	//let new_menu_dipilih=this.state.menu_dipilih.slice();
 	//let new_menu_dipilih={};
+
+	let ada=false;
+	if(this.state.dummy.some((item)=>item.id===id)){
+	    ada=true;
+	}
+
 	mdipilih.map(()=>{
 	    mdipilih.push({
 		meja:mejax,
@@ -128,13 +134,15 @@ export default class Orders extends React.Component{
 
 	let xdummy=this.state.dummy;
 
-	xdummy.push({
-	    meja:mejax,
-	    id:id,
-	    nama:nama,
-	    harga:harga
-	});
-
+	if(ada===false){
+	    xdummy.push({
+		meja:mejax,
+		id:id,
+		nama:nama,
+		harga:harga
+	    });	    
+	}
+	
 	this.setState({dummy:xdummy});
     }
     //EOF global function
