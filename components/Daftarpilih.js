@@ -34,7 +34,8 @@ export default class Daftarpilih extends React.Component{
 		this.props.data_menu.map(
 		    dm=>{
 			return(
-				<Text key={'key'+dm.id}>{dm.nama}</Text>
+				<Text key={'key'+dm.id}>{dm.nama} ({dm.jumlah})</Text>
+				
 			);
 		    }
 		)
