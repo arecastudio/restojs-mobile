@@ -28,13 +28,19 @@ export default class Daftarpilih extends React.Component{
     render(){
 	return(
 		<View>
-		<Text>Daftarpilih</Text>
 
 	    {
 		this.props.data_menu.map(
 		    dm=>{
 			return(
+				
+
+				<TouchableOpacity
+			    key={'to'+dm.id}
+			    style={styles.itemmenu}
+				>
 				<Text key={'key'+dm.id}>{dm.nama} ({dm.jumlah})</Text>
+				</TouchableOpacity>
 				
 			);
 		    }
@@ -45,3 +51,18 @@ export default class Daftarpilih extends React.Component{
 	);
     }
 }
+
+const styles=StyleSheet.create({
+    itemmenu:{	
+	margin:3,
+	
+	height:50,
+	backgroundColor:'lightgreen',	
+	alignItems:'center',
+	justifyContent:'center',
+	borderRadius:10,
+	borderWidth: 1,
+	borderColor: '#fff',
+	padding:1,
+    },
+});

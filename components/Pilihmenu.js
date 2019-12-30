@@ -39,15 +39,25 @@ export default class Pilihmenu extends React.Component{
     }
 
     componentDidMount(){
-	fetch(SERVER_URL+'data=data-menu', {
-            method: 'GET'
-	})
-	    .then((response) => response.json())
-	    .then((menus) => this.setState({menus:menus,menus_ori:menus,jenis_menu:'semua'}))
-	    .catch((error) => {
-		//console.error(error);
-		Alert.alert('Terjadi kesalahan. Periksa koneksi anda !');
-	    });
+
+	if(this.state.menus_ori.length<1){
+	    //this check method not working because menus_ori always reseted
+	    //I will find another best solution later on
+	    
+	    fetch(SERVER_URL+'data=data-menu', {
+		method: 'GET'
+	    })
+		.then((response) => response.json())
+		.then((menus) => this.setState({menus:menus,menus_ori:menus,jenis_menu:'semua'}))
+		.catch((error) => {
+		    //console.error(error);
+		    Alert.alert('Terjadi kesalahan. Periksa koneksi anda !');
+		});
+	}else{
+	    console.log('data menu masih ada, tidak perlu dipanggil kembali');
+	}
+	
+	
 
 	/*let fdata=new FormData();
 	  fdata.append('mod','data-menu');
@@ -199,19 +209,25 @@ export default class Pilihmenu extends React.Component{
 
 
 	        <Modal
-            animationType="slide"
+	    animationType="slide"
             transparent={false}
             visible={this.state.modalVisible}
-            onRequestClose={() => {
-		this.setModalVisible(false);
-		//Alert.alert('Modal has been closed.');
-            }}>
-		<View style={{marginTop:20}}>
+            onRequestClose={() => this.setModalVisible(false)}
+		>
+		<View style={styles.modalbox}>
 		<View>
+		<Text>Pilih jumlah yang akan di-order selanjutnya tekan OK untuk konfirmasi orderan agar dapat masuk ke dalam menu 3. Daftar Pesanan</Text>
+		<Text style={styles.tlabel}>Nama:</Text>
 		<Text>{this.state.modal_nama}</Text>
+		<Text style={styles.tlabel}>Harga:</Text>
 		<Text>Rp.  {this.state.modal_harga}</Text>
-		
-		<TextInput keyboardType='numeric' value={this.state.modal_jumlah+''} onChangeText={tx=>this.setState({modal_jumlah:tx})} />
+		<Text style={styles.tlabel}>Jumlah:</Text>
+		<TextInput
+	    keyboardType='numeric'
+	    value={this.state.modal_jumlah+''}
+	    onChangeText={tx=>this.setState({modal_jumlah:tx})}
+	    style={styles.inputx}
+	    />
 		</View>
 
 		<View style={styles.buttonContainer}>
@@ -265,6 +281,23 @@ const styles=StyleSheet.create({
 	flexDirection: 'row',
 	marginTop:20,
     },
-    
-    
+    tlabel:{
+	marginTop:10,
+	color:'blue',
+	/*textAlign:'center',*/
+	fontWeight:'bold',
+	fontSize:15,
+    },
+    modalbox:{
+	backgroundColor:'lightgray',
+	margin:3,
+	padding:3,
+    },
+    inputx:{
+	padding:2,
+	margin:3,
+	backgroundColor:'white',
+	textAlign:'center',
+	width:100,
+    },
 });
