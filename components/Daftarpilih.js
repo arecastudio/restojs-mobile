@@ -24,6 +24,12 @@ export default class Daftarpilih extends React.Component{
     constructor(){
 	super();
     }
+
+    cekBungkus=(value)=>{
+	if(value===true){
+	    return '#bungkus';
+	}
+    }
     
     render(){
 	return(
@@ -36,10 +42,10 @@ export default class Daftarpilih extends React.Component{
 				
 
 				<TouchableOpacity
-			    key={'to'+dm.id}
+			    key={'to'+dm.id+dm.bungkus}
 			    style={styles.itemmenu}
 				>
-				<Text key={'key'+dm.id}>{dm.nama} ({dm.jumlah})</Text>
+				<Text key={'key'+dm.id+dm.bungkus}>{dm.nama} ({dm.jumlah})  {this.cekBungkus(dm.bungkus)}</Text>
 				</TouchableOpacity>
 				
 			);

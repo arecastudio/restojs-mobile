@@ -110,14 +110,14 @@ export default class Orders extends React.Component{
 	Actions.pop();
     }
 
-    pilihMenus=(id,nama,harga,jumlah)=>{
+    pilihMenus=(id,nama,harga,jumlah,bungkus)=>{
 	let mejax=this.state.meja;
-	console.log('Orders.js. \nMeja:'+mejax+',Menu id: '+id+',nama:'+nama+',harga:'+harga+',jumlah:'+jumlah);
+	console.log('Orders.js. \nMeja:'+mejax+',Menu id: '+id+',nama:'+nama+',harga:'+harga+',jumlah:'+jumlah+', bungkus:'+bungkus);
 	//let new_menu_dipilih=this.state.menu_dipilih.slice();
 	//let new_menu_dipilih={};
 
 	let ada=false;
-	if(this.state.dummy.some((item)=>item.id===id)){
+	if(this.state.dummy.some((item)=>item.id===id && item.bungkus===bungkus )){
 	    ada=true;
 	}
 
@@ -141,6 +141,7 @@ export default class Orders extends React.Component{
 		nama:nama,
 		harga:harga,
 		jumlah:jumlah,
+		bungkus:bungkus,
 	    });	    
 	}
 	

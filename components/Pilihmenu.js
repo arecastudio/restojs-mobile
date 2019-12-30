@@ -12,6 +12,7 @@ import{
     TouchableOpacity,
     RefreshControl,
     Modal,
+    CheckBox,
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
@@ -35,6 +36,8 @@ export default class Pilihmenu extends React.Component{
 	    modal_nama:'',
 	    modal_harga:'',
 	    modal_jumlah:1,
+
+	    checked:false,
 	}
     }
 
@@ -101,8 +104,9 @@ export default class Pilihmenu extends React.Component{
 	const nama=this.state.modal_nama;
 	const harga=this.state.modal_harga;
 	const jumlah=this.state.modal_jumlah;
+	const bungkus=this.state.checked;
 	
-	this.props._pilihMenu(nomor,nama,harga,jumlah);
+	this.props._pilihMenu(nomor,nama,harga,jumlah,bungkus);
 	this.setModalVisible(false);
     }
     
@@ -114,7 +118,7 @@ export default class Pilihmenu extends React.Component{
 
 	//tambahkan MODAL
 
-	this.setState({modal_nomor:nomor,modal_nama:nama,modal_harga:harga,modal_jumlah:1});
+	this.setState({modal_nomor:nomor,modal_nama:nama,modal_harga:harga,modal_jumlah:1,checked:false,});
 	
 	this.setModalVisible(true);
     }
@@ -227,7 +231,15 @@ export default class Pilihmenu extends React.Component{
 	    value={this.state.modal_jumlah+''}
 	    onChangeText={tx=>this.setState({modal_jumlah:tx})}
 	    style={styles.inputx}
-	    />
+		/>
+
+		<Text style={styles.tlabel}>Bungkus:</Text>
+		<CheckBox
+	    value={this.state.checked}
+	    onValueChange={() => this.setState({ checked: !this.state.checked })}
+		/>
+
+	    
 		</View>
 
 		<View style={styles.buttonContainer}>
