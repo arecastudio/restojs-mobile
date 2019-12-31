@@ -23,17 +23,31 @@ const SERVER_URL='http://10.0.2.2:8010/backend/?';
 export default class Daftarpilih extends React.Component{
     constructor(){
 	super();
+
+	this.state={
+	    
+	}
     }
 
     cekBungkus=(value)=>{
 	if(value===true){
-	    return '#bungkus';
+	    return '#bgks';
 	}
+    }
+
+    onPress=(id,nama,harga,jumlah,bungkus)=>{
+	let bgks='TIDAK';
+	if(bungkus===true) {bgks='YA';}
+	
+	console.log(`id: ${id}, nama: ${nama}, jumlah: ${jumlah}, bungkus: ${bgks}`);
     }
     
     render(){
 	return(
 		<View>
+		<View style={styles.meja}>
+		<Text style={styles.mejatx}>Meja {this.props.meja}</Text>
+		</View>
 
 	    {
 		this.props.data_menu.map(
@@ -44,6 +58,7 @@ export default class Daftarpilih extends React.Component{
 				<TouchableOpacity
 			    key={'to'+dm.id+dm.bungkus}
 			    style={styles.itemmenu}
+			    onPress={()=>this.onPress(dm.id,dm.nama,dm.harga,dm.jumlah,dm.bungkus)}
 				>
 				<Text key={'key'+dm.id+dm.bungkus}>{dm.nama} ({dm.jumlah})  {this.cekBungkus(dm.bungkus)}</Text>
 				</TouchableOpacity>
@@ -70,5 +85,14 @@ const styles=StyleSheet.create({
 	borderWidth: 1,
 	borderColor: '#fff',
 	padding:1,
+    },
+    meja:{
+	justifyContent:'center',
+	alignItems:'center',
+    },
+    mejatx:{
+	fontWeight:'bold',
+	fontSize:20,
+	color:'blue',
     },
 });

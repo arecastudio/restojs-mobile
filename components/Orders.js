@@ -85,7 +85,7 @@ export default class Orders extends React.Component{
 	    break;
 	case 3:
 	    if(mejax!=''){
-		Actions.daftarpilih({data_menu:this.state.dummy});
+		Actions.daftarpilih({data_menu:this.state.dummy,meja:this.state.meja});
 	    }else{
 		Alert.alert("Pilih MEJA terlebih dahulu!");
 	    }
