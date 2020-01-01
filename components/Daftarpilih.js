@@ -12,6 +12,7 @@ import{
     ScrollView,
     TouchableOpacity,
     RefreshControl,
+    Modal,
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
@@ -25,7 +26,7 @@ export default class Daftarpilih extends React.Component{
 	super();
 
 	this.state={
-	    
+	    modalVisible: false,	    
 	}
     }
 
@@ -44,31 +45,42 @@ export default class Daftarpilih extends React.Component{
     
     render(){
 	return(
-		<View>
-		<View style={styles.meja}>
+	    <View>
+	      <View style={styles.meja}>
 		<Text style={styles.mejatx}>Meja {this.props.meja}</Text>
-		</View>
+	      </View>
 
-	    {
-		this.props.data_menu.map(
-		    dm=>{
-			return(
-				
+	      {
+		  this.props.data_menu.map(
+		      dm=>{
+			  return(
+			      
 
-				<TouchableOpacity
-			    key={'to'+dm.id+dm.bungkus}
-			    style={styles.itemmenu}
-			    onPress={()=>this.onPress(dm.id,dm.nama,dm.harga,dm.jumlah,dm.bungkus)}
+			      <TouchableOpacity
+				key={'to'+dm.id+dm.bungkus}
+				style={styles.itemmenu}
+				onPress={()=>this.onPress(dm.id,dm.nama,dm.harga,dm.jumlah,dm.bungkus)}
 				>
 				<Text key={'key'+dm.id+dm.bungkus}>{dm.nama} ({dm.jumlah})  {this.cekBungkus(dm.bungkus)}</Text>
-				</TouchableOpacity>
-				
-			);
-		    }
-		)
-	    }
-	    
+			      </TouchableOpacity>
+			      
+			  );
+		      }
+		  )
+	      }
+
+		<Modal
+	    animationType="slide"
+            transparent={true}
+            visible={this.state.modalVisible}
+            onRequestClose={() => this.setModalVisible(false)}
+		>
+		<View>
+		<Text>Ini adalah modal</Text>
 		</View>
+		</Modal>
+		
+	    </View>
 	);
     }
 }

@@ -214,7 +214,7 @@ export default class Pilihmenu extends React.Component{
 
 	        <Modal
 	    animationType="slide"
-            transparent={false}
+            transparent={true}
             visible={this.state.modalVisible}
             onRequestClose={() => this.setModalVisible(false)}
 		>
@@ -240,7 +240,7 @@ export default class Pilihmenu extends React.Component{
 		/>
 
 	    
-		</View>
+	    </View>
 
 		<View style={styles.buttonContainer}>
 		<View style={{flex:1,margin:5,}}>
